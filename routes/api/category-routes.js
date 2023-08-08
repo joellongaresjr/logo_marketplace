@@ -7,7 +7,7 @@ const { Category, Product } = require('../../models');
 // be sure to include its associated Products
 router.get('/', async (req, res) => {
   try{
-    let allCategories = await Category.findAll({
+    const allCategories = await Category.findAll({
       include: [Product]
     });
     if (!allCategories) {
@@ -63,7 +63,7 @@ router.put('/:id', async (req, res) => {
     if (!updatedCategory) {
       res.status(404).json({ message: "No category found with this id."});
     } else {
-      res.status(200).json({ message: "Category updated successfully."});
+      res.status(200).json(updatedCategory);
     }
   } catch (error) {
     res.status(500).json({ message: "An error occurred while updating the category."});
