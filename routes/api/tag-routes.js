@@ -20,23 +20,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
-  try {
-    const allTags = await Tag.findAll({
-      include: [Product],
-    });
-
-    if (!allTags) {
-      res.status(404).json({ message: "Tags not found" });
-    } else {
-      res.status(200).json(allTags);
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({err});
-  }
-});
-
 router.post("/", async (req, res) => {
   try{
     const tag = await Tag.create(req.body)
@@ -59,8 +42,11 @@ router.put("/:id", async (req, res) => {
       res.status(404).json({ message: "No tag found with this id."})
     } else {
       res.status(200).json(updatedTag)
+    } 
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err)
     }
-  }
 });
 
 router.delete("/:id", async (req, res) => {
@@ -77,8 +63,8 @@ router.delete("/:id", async (req, res) => {
       res.status(200).json({ message: "Tag deleted successfully" });
     }
   } catch (err) {
-    console.error(err);
-    res.status(500).json({err});
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
