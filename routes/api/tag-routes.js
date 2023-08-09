@@ -20,6 +20,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const tagId = req.params.id;
+    const tag = await Tag.findByPk(tagId, {
+      include: [Product], // Include associated Products
+    });
+
+    if (!tag) {
+      res.status(404).json({ message: "Tag not found" });
+    } else {
+      res.status(200).json(tag);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   try{
     const tag = await Tag.create(req.body)
