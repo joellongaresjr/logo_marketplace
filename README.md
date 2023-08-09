@@ -21,6 +21,7 @@ Please click on the link provided to be demonstrated a demo on how this applicat
 
 # Code Highlights
 
+![Code.Highlight](/images/Ecommerce%20Code%20Highlight.png)
 
 ## Learning Points
 
