@@ -23,15 +23,19 @@ Category.hasMany(Product, {
 });
 
 // Products belongToMany Tags (through ProductTag)
+// Relationship establishes a many-to-many connection between Products and Tags through our ProductTag table.
+// A product can have multiple Tags, and Tag can be associated with multiple Products
 Product.belongsToMany(Tag, {
-  through: ProductTag,
-  foreignKey: 'product_id', 
+  through: ProductTag, // specifiying our tabel for our many to many relationship (ProductTag)
+  foreignKey: 'product_id', // refering to the foreign key that links to the 'Product'
 });
 
 // Tags belongToMany Products (through ProductTag)
+// Similar to the previous relationshiop, this also establishes a many - to - many relationship (Tag & Products)
+// A Tag can have multiple assocaited Products, and a Product can be asscoiated with multipole Tags
 Tag.belongsToMany(Product, {
   through: ProductTag,
-  foreignkey: 'tag_id',
+  foreignkey: 'tag_id', // refering to the foreign key that links to the 'Tag'
 });
 
 module.exports = {
